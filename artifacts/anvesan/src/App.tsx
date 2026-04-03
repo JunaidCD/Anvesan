@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
+import AgenticPaymentsArticle from "@/pages/AgenticPaymentsArticle";
 
 const queryClient = new QueryClient();
 
@@ -13,7 +14,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/research" component={Home} />
-      <Route path="/research/:id" component={Home} />
+      <Route path="/research/state-of-agentic-payments-march-2026" component={AgenticPaymentsArticle} />
       <Route component={NotFound} />
     </Switch>
   );
