@@ -255,10 +255,9 @@ export default function Home() {
             {/* Main quote — left-bordered, prominent */}
             <motion.div variants={fadeUp} className="pl-6 border-l-[2px] border-background/20 mb-16 max-w-3xl">
               <blockquote className="text-[1.65rem] md:text-[2.1rem] lg:text-[2.4rem] font-serif leading-[1.32] text-background tracking-[-0.01em]">
-                Anvesan exists to accelerate stablecoin adoption to the point where stablecoins become
-                indistinguishable from money —{" "}
+                Anvesan exists to accelerate global stablecoin adoption, driving the market until programmable assets become indistinguishable from traditional fiat —{" "}
                 <em className="italic" style={{ color: "hsl(var(--background) / 0.4)" }}>
-                  ubiquitous, interoperable, and invisible in everyday use.
+                  ubiquitous, natively interoperable, and structurally invisible.
                 </em>
               </blockquote>
             </motion.div>
@@ -271,16 +270,13 @@ export default function Home() {
               <motion.div variants={fadeUp}>
                 <p className="text-[0.6rem] font-bold tracking-[0.25em] uppercase text-background/25 mb-3">01</p>
                 <p className="text-sm font-light text-background/55 leading-[1.8]">
-                  We believe the future of finance is one where remittance, trade settlement, and FX happen
-                  instantly, seamlessly, and across borders with minimal friction.
+                  We are advancing a modernized financial architecture where cross-border remittances, B2B trade settlements, and foreign exchange clear instantaneously, eliminating legacy intermediaries.
                 </p>
               </motion.div>
               <motion.div variants={fadeUp}>
                 <p className="text-[0.6rem] font-bold tracking-[0.25em] uppercase text-background/25 mb-3">02</p>
                 <p className="text-sm font-light text-background/55 leading-[1.8]">
-                  Anvesan works closely with fintechs, neobanks, and enterprises building on stablecoin
-                  rails — offering regulatory clarity, market intelligence, and access to a network of
-                  industry veterans.
+                  Anvesan partners with fintech operators, neobanks, and enterprises scaling on stablecoin rails—equipping them with rigorous regulatory frameworks, proprietary market intelligence, and strategic operator networks.
                 </p>
               </motion.div>
             </motion.div>
@@ -645,9 +641,9 @@ export default function Home() {
               {/* Right — use cases as styled list */}
               <motion.div variants={stagger} className="space-y-0 border border-background/10 rounded-2xl overflow-hidden">
                 {[
-                  { n: "01", label: "Research partnerships", sub: "Strategic advisory engagements" },
-                  { n: "02", label: "Media & press", sub: "Inquiries and coverage requests" },
-                  { n: "03", label: "General", sub: "All other correspondence" },
+                  { n: "01", label: "Strategic Advisory", sub: "For institutional research partnerships and bespoke consulting engagements." },
+                  { n: "02", label: "Media Relations", sub: "For executive interviews, industry commentary, and press coverage." },
+                  { n: "03", label: "General Inquiries", sub: "For operational correspondence and general communications." },
                 ].map((item, i) => (
                   <motion.div
                     variants={fadeUp}
