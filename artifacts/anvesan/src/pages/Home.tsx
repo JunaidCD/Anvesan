@@ -224,44 +224,48 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
+            className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 lg:gap-20"
           >
-            {/* Section label */}
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-14">
-              <div className="h-px w-6 bg-background/30" />
-              <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-background/40">
-                Mission
-              </span>
+            {/* Left — label column */}
+            <motion.div variants={fadeUp} className="pt-1">
+              <div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2">
+                <div className="h-px w-6 bg-background/30 lg:w-full lg:max-w-[2rem]" />
+                <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-background/40">
+                  Mission
+                </span>
+              </div>
             </motion.div>
 
-            {/* Pull-quote */}
-            <motion.blockquote
-              variants={fadeUp}
-              className="max-w-4xl text-[clamp(1.6rem,3.5vw,3rem)] font-serif leading-[1.3] text-background mb-10"
-            >
-              Anvesan exists to accelerate stablecoin adoption to the point where stablecoins become
-              indistinguishable from money —{" "}
-              <em className="italic text-background/45">
-                ubiquitous, interoperable, and invisible in everyday use.
-              </em>
-            </motion.blockquote>
+            {/* Right — content column */}
+            <div className="space-y-8">
+              <motion.blockquote
+                variants={fadeUp}
+                className="text-2xl md:text-3xl lg:text-[2rem] font-serif leading-[1.38] text-background max-w-2xl"
+              >
+                Anvesan exists to accelerate stablecoin adoption to the point where stablecoins become
+                indistinguishable from money —{" "}
+                <em className="italic text-background/45">
+                  ubiquitous, interoperable, and invisible in everyday use.
+                </em>
+              </motion.blockquote>
 
-            <motion.div variants={fadeUp} className="h-px bg-background/10 max-w-4xl mb-10" />
+              <motion.div variants={fadeUp} className="h-px bg-background/10" />
 
-            {/* Two-col body */}
-            <motion.div
-              variants={stagger}
-              className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl"
-            >
-              <motion.p variants={fadeUp} className="text-base font-light text-background/65 leading-relaxed">
-                We believe the future of finance is one where remittance, trade settlement, and FX happen
-                instantly, seamlessly, and across borders with minimal friction.
-              </motion.p>
-              <motion.p variants={fadeUp} className="text-base font-light text-background/65 leading-relaxed">
-                Anvesan works closely with fintechs, neobanks, and enterprises building on stablecoin
-                rails — offering regulatory clarity, market intelligence, and access to a network of
-                industry veterans.
-              </motion.p>
-            </motion.div>
+              <motion.div
+                variants={stagger}
+                className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl"
+              >
+                <motion.p variants={fadeUp} className="text-sm font-light text-background/60 leading-relaxed">
+                  We believe the future of finance is one where remittance, trade settlement, and FX happen
+                  instantly, seamlessly, and across borders with minimal friction.
+                </motion.p>
+                <motion.p variants={fadeUp} className="text-sm font-light text-background/60 leading-relaxed">
+                  Anvesan works closely with fintechs, neobanks, and enterprises building on stablecoin
+                  rails — offering regulatory clarity, market intelligence, and access to a network of
+                  industry veterans.
+                </motion.p>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -552,46 +556,73 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════════
           CONTACT — ULTRA MINIMAL
       ══════════════════════════════════════════════════════════ */}
-      <section id="contact" className="relative py-36 md:py-48 bg-foreground text-background overflow-hidden noise">
+      <section id="contact" className="relative py-28 md:py-40 bg-foreground text-background overflow-hidden noise">
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
+            className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 lg:gap-20"
           >
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-10">
-              <div className="h-px w-6 bg-background/30" />
-              <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-background/40">
-                Contact
-              </span>
+            {/* Left — label column */}
+            <motion.div variants={fadeUp} className="pt-1">
+              <div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2">
+                <div className="h-px w-6 bg-background/30 lg:w-full lg:max-w-[2rem]" />
+                <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-background/40">
+                  Contact
+                </span>
+              </div>
             </motion.div>
 
-            <motion.h2 variants={fadeUp} className="font-serif font-medium text-[clamp(2.5rem,5vw,5rem)] leading-[1.05] text-background mb-6 max-w-3xl">
-              For research partnerships, advisory, or media — reach us directly.
-            </motion.h2>
+            {/* Right — two-column content */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 md:gap-20 items-start">
 
-            <motion.div variants={fadeUp} className="h-px bg-background/10 max-w-2xl mb-10" />
+              {/* Heading + email */}
+              <div className="space-y-8">
+                <motion.h2
+                  variants={fadeUp}
+                  className="font-serif font-medium text-3xl md:text-4xl lg:text-5xl leading-[1.15] text-background max-w-md"
+                >
+                  Let's talk.
+                </motion.h2>
 
-            <motion.a
-              variants={fadeUp}
-              href="mailto:research@anvesan.org"
-              className="group inline-flex items-center gap-4 text-background"
-            >
-              <div className="w-10 h-10 rounded-xl border border-background/20 flex items-center justify-center group-hover:bg-background/10 transition-colors">
-                <Mail className="w-5 h-5 text-background/60" />
+                <motion.div variants={fadeUp} className="h-px bg-background/10" />
+
+                <motion.a
+                  variants={fadeUp}
+                  href="mailto:research@anvesan.org"
+                  className="group inline-flex items-center gap-3 text-background"
+                >
+                  <div className="w-9 h-9 rounded-xl border border-background/20 flex items-center justify-center group-hover:bg-background/10 transition-colors flex-shrink-0">
+                    <Mail className="w-4 h-4 text-background/60" />
+                  </div>
+                  <span className="font-serif text-lg md:text-xl border-b border-background/20 pb-0.5 group-hover:border-background/50 transition-colors">
+                    research@anvesan.org
+                  </span>
+                </motion.a>
               </div>
-              <span className="font-serif text-xl md:text-2xl border-b border-background/20 pb-0.5 group-hover:border-background/50 transition-colors">
-                research@anvesan.org
-              </span>
-            </motion.a>
+
+              {/* Description block */}
+              <motion.div variants={fadeUp} className="max-w-xs space-y-4 md:pt-1">
+                <p className="text-sm font-light text-background/55 leading-relaxed">
+                  For research partnerships and strategic advisory engagements.
+                </p>
+                <p className="text-sm font-light text-background/55 leading-relaxed">
+                  For media inquiries and press coverage.
+                </p>
+                <p className="text-sm font-light text-background/55 leading-relaxed">
+                  For general correspondence.
+                </p>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
 
-        {/* Large decorative type in background */}
+        {/* Decorative background type */}
         <div
           aria-hidden
-          className="absolute right-0 bottom-0 font-serif font-bold text-[clamp(6rem,18vw,16rem)] leading-none text-background/[0.03] select-none pointer-events-none translate-y-1/4 translate-x-[10%]"
+          className="absolute right-0 bottom-0 font-serif font-bold text-[clamp(6rem,18vw,16rem)] leading-none text-background/[0.025] select-none pointer-events-none translate-y-1/4 translate-x-[10%]"
         >
           Anvesan
         </div>
