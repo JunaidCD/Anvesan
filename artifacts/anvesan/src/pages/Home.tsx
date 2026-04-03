@@ -2,183 +2,273 @@ import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, Landmark, Shield, FileText, Lightbulb, BookOpen, ArrowUpRight, Mail } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail, Globe, Landmark, Shield } from "lucide-react";
 import { Link } from "wouter";
 
+/* ── Animation presets ─────────────────────────────────────── */
+const ease = [0.22, 1, 0.36, 1] as const;
+
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
 };
 
 const stagger = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.13 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.11 } },
 };
 
 const scrollTo = (id: string) =>
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
+/* ── Marquee strip ─────────────────────────────────────────── */
+const TICKER = [
+  "Stablecoin Infrastructure",
+  "Settlement Architecture",
+  "Cross-Border Finance",
+  "Regulatory Frameworks",
+  "Licensing & Compliance",
+  "Market Structure",
+  "Agentic Payments",
+  "Interoperability",
+  "Policy Research",
+  "Enterprise Rails",
+];
+
+function Marquee() {
+  const items = [...TICKER, ...TICKER];
+  return (
+    <div className="border-y border-border overflow-hidden py-4 select-none" aria-hidden>
+      <div className="marquee-track">
+        {items.map((t, i) => (
+          <span key={i} className="flex items-center gap-6 pr-6 text-xs font-medium tracking-[0.18em] uppercase text-muted-foreground whitespace-nowrap">
+            {t}
+            <span className="w-1 h-1 rounded-full bg-border flex-shrink-0" />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Hero right-side preview card ──────────────────────────── */
+function HeroPreviewCard() {
+  return (
+    <Link href="/research/state-of-agentic-payments-march-2026" className="block group">
+      <motion.div
+        initial={{ opacity: 0, x: 32, y: 16 }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        transition={{ delay: 0.55, duration: 0.9, ease }}
+        className="relative rounded-2xl border border-border bg-card shadow-xl overflow-hidden lift"
+      >
+        {/* Card header strip */}
+        <div className="bg-foreground px-6 pt-6 pb-8 relative overflow-hidden">
+          <div aria-hidden className="absolute inset-0 noise" />
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-[0.6rem] font-bold tracking-[0.2em] uppercase text-background/50">
+                Anvesan · March 2026
+              </span>
+              <ArrowUpRight className="w-4 h-4 text-background/40 group-hover:text-background/80 transition-colors" />
+            </div>
+            <p className="font-serif text-xl text-background leading-snug">
+              The State of Agentic Payments
+            </p>
+          </div>
+          {/* Decorative circles */}
+          <div aria-hidden className="absolute -bottom-8 -right-8 w-28 h-28 rounded-full border border-background/10" />
+          <div aria-hidden className="absolute -bottom-4 -right-4 w-14 h-14 rounded-full border border-background/10" />
+        </div>
+
+        {/* Card body */}
+        <div className="px-6 py-5">
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {["AI", "Payments", "Agentic", "Web3"].map((t) => (
+              <span key={t} className="text-[0.6rem] font-medium uppercase tracking-widest px-2 py-0.5 rounded-full border border-border text-muted-foreground">
+                {t}
+              </span>
+            ))}
+          </div>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            What is live, who is leading, what the numbers say — and how the market is splitting between
+            card-led agentic checkout and internet-native machine payments.
+          </p>
+          <div className="mt-5 pt-4 border-t border-border flex items-center justify-between">
+            <span className="text-[0.65rem] font-medium text-muted-foreground uppercase tracking-wider">12 min read</span>
+            <span className="text-[0.65rem] font-semibold text-foreground group-hover:underline underline-offset-2">
+              Read overview →
+            </span>
+          </div>
+        </div>
+      </motion.div>
+    </Link>
+  );
+}
+
 export default function Home() {
   return (
     <Layout>
-      {/* ── HERO ──────────────────────────────────────────────────── */}
+
+      {/* ══════════════════════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════════════════════ */}
       <section id="hero" className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Mesh gradient */}
+        {/* Background grid */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.035] dark:opacity-[0.06]"
+          style={{
+            backgroundImage:
+              "linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
+          }}
+        />
+        {/* Radial vignette to fade grid at edges */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 -z-10"
           style={{
             background:
-              "radial-gradient(ellipse 80% 60% at 70% 10%, hsl(222 44% 10% / 0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 20% 80%, hsl(215 14% 48% / 0.06) 0%, transparent 60%)",
-          }}
-        />
-        {/* Grid lines */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.03] dark:opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
+              "radial-gradient(ellipse 70% 80% at 50% 50%, transparent 40%, hsl(var(--background)) 100%)",
           }}
         />
 
-        <div className="max-w-7xl mx-auto px-6 pt-36 pb-24">
-          <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-5xl">
-            {/* Eyebrow */}
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-10">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-background text-[0.7rem] font-semibold tracking-[0.2em] uppercase text-muted-foreground">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                Stablecoin Research & Strategic Advisory
-              </span>
+        <div className="max-w-7xl mx-auto px-6 pt-32 pb-16 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_440px] gap-16 xl:gap-24 items-center">
+
+            {/* Left column */}
+            <motion.div initial="hidden" animate="visible" variants={stagger}>
+
+              {/* Eyebrow */}
+              <motion.div variants={fadeUp} className="mb-8">
+                <span className="inline-flex items-center gap-2.5 text-[0.68rem] font-semibold tracking-[0.22em] uppercase text-muted-foreground">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_2px_rgba(16,185,129,0.4)] animate-pulse" />
+                  Stablecoin Research & Strategic Advisory
+                </span>
+              </motion.div>
+
+              {/* Headline */}
+              <motion.h1
+                variants={fadeUp}
+                className="font-serif font-medium leading-[1.05] tracking-[-0.01em] text-[clamp(2.8rem,6vw,5.5rem)] mb-7 text-foreground"
+              >
+                Bringing
+                <br />
+                Clarity to
+                <br />
+                <em className="not-italic text-gradient">Stablecoins.</em>
+              </motion.h1>
+
+              {/* Descriptor pill row */}
+              <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-2 mb-8">
+                {["Technical", "Regulatory", "Policy"].map((t, i) => (
+                  <span key={t} className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-muted-foreground">{t}</span>
+                    {i < 2 && <span className="w-1 h-1 rounded-full bg-border" />}
+                  </span>
+                ))}
+              </motion.div>
+
+              {/* Body */}
+              <motion.p variants={fadeUp} className="text-base text-muted-foreground max-w-lg mb-10 leading-relaxed">
+                Anvesan researches the infrastructure, regulation, and market structure shaping the global
+                adoption of stablecoins across payments, banking, and enterprise finance.
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-start gap-3">
+                <Button
+                  size="lg"
+                  className="h-11 px-6 rounded-xl font-medium text-sm group gap-2"
+                  onClick={() => scrollTo("contact")}
+                >
+                  Get in touch
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="h-11 px-6 rounded-xl font-medium text-sm border-border hover:bg-foreground/5"
+                  onClick={() => scrollTo("featured-research")}
+                >
+                  View research
+                </Button>
+              </motion.div>
+
+              {/* Founded note */}
+              <motion.div variants={fadeUp} className="mt-12 pt-8 border-t border-border">
+                <p className="text-xs text-muted-foreground/60 tracking-widest uppercase font-medium">
+                  Founded 2026 · anvesan.org
+                </p>
+              </motion.div>
             </motion.div>
 
-            {/* Headline */}
-            <motion.h1
-              variants={fadeUp}
-              className="font-serif font-medium leading-[1.08] tracking-tight text-5xl md:text-7xl lg:text-[5.5rem] mb-8 text-foreground"
-            >
-              Bringing Clarity<br />
-              to <em className="not-italic text-gradient">Stablecoins.</em>
-            </motion.h1>
-
-            {/* Sub-headline */}
-            <motion.p
-              variants={fadeUp}
-              className="text-xl md:text-2xl font-serif italic text-muted-foreground mb-6 max-w-2xl"
-            >
-              Technical. Regulatory. Policy.
-            </motion.p>
-
-            <motion.p
-              variants={fadeUp}
-              className="text-base md:text-lg text-muted-foreground max-w-2xl mb-12 leading-relaxed"
-            >
-              Anvesan researches the infrastructure, regulation, and market structure shaping
-              the global adoption of stablecoins across payments, banking, and enterprise finance.
-            </motion.p>
-
-            {/* CTAs */}
-            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-start gap-3">
-              <Button
-                size="lg"
-                className="h-12 px-7 rounded-xl font-medium text-base group gap-2"
-                onClick={() => scrollTo("contact")}
-              >
-                Get in touch
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-12 px-7 rounded-xl font-medium text-base border-border hover:bg-foreground/5"
-                onClick={() => scrollTo("featured-research")}
-              >
-                View research
-              </Button>
-            </motion.div>
-          </motion.div>
-
-          {/* Stats strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-24 pt-10 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-8"
-          >
-            {[
-              { value: "3", label: "Research Focus Areas" },
-              { value: "$180T+", label: "Cross-border flows studied" },
-              { value: "100+", label: "Jurisdictions tracked" },
-              { value: "2026", label: "Founded" },
-            ].map((s) => (
-              <div key={s.label}>
-                <p className="font-serif text-3xl md:text-4xl font-medium tracking-tight mb-1 text-foreground">{s.value}</p>
-                <p className="text-xs text-muted-foreground uppercase tracking-widest">{s.label}</p>
-              </div>
-            ))}
-          </motion.div>
+            {/* Right column — preview card */}
+            <div className="hidden lg:block">
+              <HeroPreviewCard />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── MISSION ───────────────────────────────────────────────── */}
-      <section id="mission" className="relative py-28 md:py-36 bg-foreground text-background overflow-hidden">
-        {/* Subtle noise overlay */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            backgroundSize: "200px 200px",
-          }}
-        />
+      {/* ── Marquee ticker ────────────────────────────────────── */}
+      <Marquee />
 
-        <div className="max-w-7xl mx-auto px-6 relative">
+      {/* ══════════════════════════════════════════════════════════
+          MISSION
+      ══════════════════════════════════════════════════════════ */}
+      <section id="mission" className="relative py-28 md:py-40 bg-foreground text-background overflow-hidden noise">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start"
           >
-            <motion.div variants={fadeUp} className="lg:col-span-3 pt-2">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="h-px w-6 bg-background/40" />
-                <span className="text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-background/50">
-                  Mission
-                </span>
-              </div>
+            {/* Section label */}
+            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-14">
+              <div className="h-px w-6 bg-background/30" />
+              <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-background/40">
+                Mission
+              </span>
             </motion.div>
 
-            <div className="lg:col-span-9 space-y-8">
-              <motion.p
-                variants={fadeUp}
-                className="text-2xl md:text-3xl lg:text-4xl font-serif leading-[1.35] text-background"
-              >
-                Anvesan exists to accelerate stablecoin adoption to the point where stablecoins become
-                indistinguishable from money:{" "}
-                <span className="italic text-background/55">
-                  ubiquitous, interoperable, and invisible in everyday use.
-                </span>
-              </motion.p>
+            {/* Pull-quote */}
+            <motion.blockquote
+              variants={fadeUp}
+              className="max-w-4xl text-[clamp(1.6rem,3.5vw,3rem)] font-serif leading-[1.3] text-background mb-10"
+            >
+              Anvesan exists to accelerate stablecoin adoption to the point where stablecoins become
+              indistinguishable from money —{" "}
+              <em className="italic text-background/45">
+                ubiquitous, interoperable, and invisible in everyday use.
+              </em>
+            </motion.blockquote>
 
-              <motion.div variants={fadeUp} className="h-px bg-background/10 w-full" />
+            <motion.div variants={fadeUp} className="h-px bg-background/10 max-w-4xl mb-10" />
 
-              <motion.p
-                variants={fadeUp}
-                className="text-base md:text-lg font-light text-background/70 leading-relaxed max-w-2xl"
-              >
+            {/* Two-col body */}
+            <motion.div
+              variants={stagger}
+              className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl"
+            >
+              <motion.p variants={fadeUp} className="text-base font-light text-background/65 leading-relaxed">
                 We believe the future of finance is one where remittance, trade settlement, and FX happen
-                instantly, seamlessly, and across borders with minimal friction. Anvesan works closely with
-                fintechs, neobanks, and enterprises building on stablecoin rails—offering regulatory clarity,
-                market intelligence, and access to a network of industry veterans.
+                instantly, seamlessly, and across borders with minimal friction.
               </motion.p>
-            </div>
+              <motion.p variants={fadeUp} className="text-base font-light text-background/65 leading-relaxed">
+                Anvesan works closely with fintechs, neobanks, and enterprises building on stablecoin
+                rails — offering regulatory clarity, market intelligence, and access to a network of
+                industry veterans.
+              </motion.p>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── RESEARCH FOCUS ────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════
+          RESEARCH FOCUS — BENTO GRID
+      ══════════════════════════════════════════════════════════ */}
       <section id="research-focus" className="py-28 md:py-36 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
@@ -187,60 +277,92 @@ export default function Home() {
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
           >
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-5">
-              <div className="h-px w-6 bg-foreground/20" />
-              <span className="text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-muted-foreground">
-                Research Focus
-              </span>
-            </motion.div>
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-serif mb-4 max-w-xl">
-              What Anvesan studies
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-muted-foreground text-lg max-w-2xl mb-16 leading-relaxed">
-              Each paper is designed for fintech operators, enterprises, policymakers, and market participants
-              building on stablecoin rails.
-            </motion.p>
-
-            <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {[
-                {
-                  title: "Technical",
-                  icon: <Globe className="w-5 h-5" />,
-                  desc: "Payments infrastructure, settlement architecture, wallet design, interoperability, and the systems that make stablecoins usable at scale.",
-                  accent: "from-blue-500/8 to-transparent",
-                },
-                {
-                  title: "Regulatory",
-                  icon: <Shield className="w-5 h-5" />,
-                  desc: "Licensing, compliance design, legal frameworks, and the operational specifics of building with stablecoin rails across jurisdictions.",
-                  accent: "from-violet-500/8 to-transparent",
-                },
-                {
-                  title: "Policy",
-                  icon: <Landmark className="w-5 h-5" />,
-                  desc: "How governments, financial institutions, and market participants shape the role of stablecoins in the future of money and cross-border finance.",
-                  accent: "from-emerald-500/8 to-transparent",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  variants={fadeUp}
-                  key={i}
-                  className={`card-hover group relative rounded-2xl border border-border bg-gradient-to-br ${item.accent} bg-card p-8 overflow-hidden`}
-                >
-                  <div className="w-10 h-10 rounded-xl bg-foreground/5 border border-border flex items-center justify-center mb-6 text-foreground/60 group-hover:text-foreground group-hover:bg-foreground/10 transition-colors">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-xl font-serif mb-3 text-foreground">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+              <div>
+                <motion.div variants={fadeUp} className="flex items-center gap-3 mb-4">
+                  <div className="h-px w-6 bg-foreground/20" />
+                  <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-muted-foreground">
+                    Research Focus
+                  </span>
                 </motion.div>
-              ))}
+                <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-serif">
+                  What Anvesan studies
+                </motion.h2>
+              </div>
+              <motion.p variants={fadeUp} className="text-muted-foreground text-sm max-w-xs leading-relaxed">
+                Focused research for fintech operators, enterprises, and policymakers building on stablecoin rails.
+              </motion.p>
+            </div>
+
+            {/* Bento grid */}
+            <motion.div
+              variants={stagger}
+              className="grid grid-cols-1 md:grid-cols-3 gap-4"
+            >
+              {/* Large card — Technical */}
+              <motion.div variants={fadeUp} className="md:col-span-2">
+                <div className="lift h-full rounded-2xl border border-border bg-card p-10 flex flex-col justify-between min-h-[300px] relative overflow-hidden group">
+                  {/* Large decorative number */}
+                  <span
+                    aria-hidden
+                    className="absolute right-8 bottom-4 font-serif text-[9rem] font-bold leading-none text-foreground/[0.04] select-none pointer-events-none"
+                  >
+                    01
+                  </span>
+                  <div className="relative z-10">
+                    <div className="w-11 h-11 rounded-xl bg-foreground/6 border border-border flex items-center justify-center mb-8 text-foreground/50 group-hover:bg-foreground/10 group-hover:text-foreground transition-colors">
+                      <Globe className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-3xl font-serif mb-4">Technical</h3>
+                    <p className="text-muted-foreground leading-relaxed max-w-sm">
+                      Payments infrastructure, settlement architecture, wallet design, interoperability, and
+                      the systems that make stablecoins usable at scale.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Small stack right */}
+              <motion.div variants={stagger} className="flex flex-col gap-4">
+                {[
+                  {
+                    n: "02", title: "Regulatory", icon: <Shield className="w-4 h-4" />,
+                    desc: "Licensing, compliance design, legal frameworks, and jurisdictional specifics across markets.",
+                  },
+                  {
+                    n: "03", title: "Policy", icon: <Landmark className="w-4 h-4" />,
+                    desc: "How governments and institutions shape the role of stablecoins in the future of money.",
+                  },
+                ].map((item) => (
+                  <motion.div variants={fadeUp} key={item.n}>
+                    <div className="lift h-full rounded-2xl border border-border bg-card p-7 flex flex-col gap-5 relative overflow-hidden group">
+                      <span
+                        aria-hidden
+                        className="absolute right-5 bottom-2 font-serif text-[5rem] font-bold leading-none text-foreground/[0.04] select-none pointer-events-none"
+                      >
+                        {item.n}
+                      </span>
+                      <div className="w-9 h-9 rounded-xl bg-foreground/6 border border-border flex items-center justify-center text-foreground/50 group-hover:bg-foreground/10 group-hover:text-foreground transition-colors">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-serif mb-2">{item.title}</h3>
+                        <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── FEATURED RESEARCH ─────────────────────────────────────── */}
-      <section id="featured-research" className="py-28 md:py-36 bg-muted/40 border-y border-border">
+      {/* ══════════════════════════════════════════════════════════
+          FEATURED RESEARCH — EDITORIAL
+      ══════════════════════════════════════════════════════════ */}
+      <section id="featured-research" className="py-28 md:py-36 border-t border-border bg-muted/30">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial="hidden"
@@ -248,11 +370,12 @@ export default function Home() {
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
           >
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            {/* Header row */}
+            <div className="flex items-end justify-between mb-12">
               <div>
-                <motion.div variants={fadeUp} className="flex items-center gap-3 mb-5">
+                <motion.div variants={fadeUp} className="flex items-center gap-3 mb-4">
                   <div className="h-px w-6 bg-foreground/20" />
-                  <span className="text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-muted-foreground">
+                  <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-muted-foreground">
                     Research
                   </span>
                 </motion.div>
@@ -263,141 +386,162 @@ export default function Home() {
               <motion.div variants={fadeUp}>
                 <Link
                   href="/research"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group"
+                  className="hidden md:inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors group"
                 >
-                  View all <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  All research
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
               </motion.div>
             </div>
 
-            <motion.div variants={stagger} className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-              {/* Live article card */}
-              <motion.div variants={fadeUp} className="lg:col-span-1">
-                <Link href="/research/state-of-agentic-payments-march-2026" className="block h-full group">
-                  <div className="card-hover h-full rounded-2xl border border-border bg-card p-8 flex flex-col gap-6 hover:border-foreground/20 transition-colors relative overflow-hidden">
-                    <div
-                      aria-hidden
-                      className="absolute top-0 right-0 w-48 h-48 rounded-full bg-primary/4 blur-3xl pointer-events-none"
-                    />
-                    <div className="flex items-center gap-2">
-                      <Badge className="rounded-full text-[0.65rem] px-2.5 py-0.5 font-medium bg-foreground text-background">
-                        State of the Market
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">March 2026</span>
+            {/* Feature card — spans full width on mobile, 2/3 left on lg */}
+            <motion.div variants={stagger} className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+              {/* Primary feature */}
+              <motion.div variants={fadeUp} className="lg:col-span-2">
+                <Link href="/research/state-of-agentic-payments-march-2026" className="block group h-full">
+                  <div className="lift h-full rounded-2xl bg-foreground text-background overflow-hidden relative flex flex-col min-h-[380px]">
+                    {/* Noise */}
+                    <div aria-hidden className="absolute inset-0 noise z-0" />
+                    {/* Decorative rings */}
+                    <div aria-hidden className="absolute -top-16 -right-16 w-64 h-64 rounded-full border border-background/8 pointer-events-none" />
+                    <div aria-hidden className="absolute -top-8 -right-8 w-40 h-40 rounded-full border border-background/8 pointer-events-none" />
+
+                    {/* Top bar */}
+                    <div className="relative z-10 flex items-center justify-between px-8 pt-8 mb-auto">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[0.62rem] font-bold tracking-[0.18em] uppercase text-background/50">
+                          State of the Market
+                        </span>
+                        <span className="text-background/30">·</span>
+                        <span className="text-[0.62rem] text-background/40">March 2026</span>
+                      </div>
+                      <div className="w-8 h-8 rounded-lg border border-background/15 flex items-center justify-center group-hover:bg-background/10 transition-colors">
+                        <ArrowUpRight className="w-4 h-4 text-background/50 group-hover:text-background transition-colors" />
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-serif leading-tight mb-3 group-hover:text-muted-foreground transition-colors">
+
+                    {/* Content */}
+                    <div className="relative z-10 px-8 pb-8 mt-12">
+                      <h3 className="font-serif text-3xl md:text-4xl leading-tight mb-4 text-background">
                         The State of Agentic Payments
                       </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        What is live, who is leading, what the numbers say, and how the market is splitting between
-                        card-led agentic checkout and internet-native machine payments.
+                      <p className="text-sm text-background/60 leading-relaxed mb-8 max-w-md">
+                        What is live, who is leading, what the numbers say, and how the market is
+                        splitting between card-led agentic checkout and internet-native machine payments.
                       </p>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm font-medium text-foreground group-hover:gap-3 transition-all">
-                      Read overview <ArrowUpRight className="w-4 h-4" />
+                      <div className="flex flex-wrap gap-1.5">
+                        {["AI", "Payments", "Fintech", "Agentic", "Web3"].map((t) => (
+                          <span key={t} className="text-[0.58rem] font-medium uppercase tracking-widest px-2 py-0.5 rounded-full border border-background/20 text-background/50">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-8 flex items-center gap-2 text-sm font-medium text-background group-hover:gap-3 transition-all">
+                        Read overview <ArrowRight className="w-4 h-4" />
+                      </div>
                     </div>
                   </div>
                 </Link>
               </motion.div>
 
-              {/* Coming soon cards */}
-              {[
-                {
-                  tag: "Regulatory",
-                  date: "April 2026",
-                  title: "Stablecoins, Regulation & Market Structure",
-                  desc: "How licensing, compliance, and jurisdictional fragmentation are shaping stablecoin adoption across markets.",
-                },
-                {
-                  tag: "Policy",
-                  date: "April 2026",
-                  title: "Enterprise Rails for Cross-Border Settlement",
-                  desc: "Why fintechs, neobanks, and enterprises are evaluating stablecoin-native rails for remittance, treasury movement, and trade settlement.",
-                },
-              ].map((item, i) => (
-                <motion.div variants={fadeUp} key={i}>
-                  <div className="h-full rounded-2xl border border-border/60 bg-muted/50 p-8 flex flex-col gap-6 relative overflow-hidden">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
-                        <Badge variant="outline" className="rounded-full text-[0.65rem] px-2.5 py-0.5 font-medium border-border text-muted-foreground">
-                          {item.tag}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">{item.date}</span>
+              {/* Coming soon stack */}
+              <motion.div variants={stagger} className="flex flex-col gap-4">
+                {[
+                  {
+                    tag: "Regulatory", date: "Apr 2026",
+                    title: "Stablecoins, Regulation & Market Structure",
+                    desc: "Licensing, compliance, and jurisdictional fragmentation shaping adoption.",
+                  },
+                  {
+                    tag: "Policy", date: "Apr 2026",
+                    title: "Enterprise Rails for Cross-Border Settlement",
+                    desc: "Why enterprises are moving to stablecoin-native rails for treasury and trade.",
+                  },
+                ].map((item, i) => (
+                  <motion.div variants={fadeUp} key={i} className="flex-1">
+                    <div className="h-full rounded-2xl border border-border/70 bg-background/60 p-7 flex flex-col gap-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-[0.58rem] px-2 py-0.5 rounded-full font-medium border-border/70 text-muted-foreground uppercase tracking-wider">
+                            {item.tag}
+                          </Badge>
+                          <span className="text-[0.6rem] text-muted-foreground/60">{item.date}</span>
+                        </div>
+                        <span className="text-[0.58rem] font-semibold tracking-[0.15em] uppercase text-muted-foreground/50 border border-border/50 rounded-full px-2.5 py-1">
+                          Soon
+                        </span>
                       </div>
-                      <span className="text-[0.65rem] font-medium tracking-widest uppercase text-muted-foreground/60 bg-background/60 border border-border/50 rounded-full px-2.5 py-1">
-                        Soon
-                      </span>
+                      <div className="flex-1">
+                        <h3 className="font-serif text-lg leading-snug mb-2 text-foreground/55">{item.title}</h3>
+                        <p className="text-xs text-muted-foreground/60 leading-relaxed">{item.desc}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-serif leading-tight mb-3 text-foreground/60">{item.title}</h3>
-                      <p className="text-sm text-muted-foreground/70 leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── WHAT WE OFFER ─────────────────────────────────────────── */}
-      <section id="what-we-offer" className="py-28 md:py-36 bg-background">
+      {/* ══════════════════════════════════════════════════════════
+          WHAT WE OFFER — NUMBERED EDITORIAL ROWS
+      ══════════════════════════════════════════════════════════ */}
+      <section id="what-we-offer" className="py-28 md:py-36 bg-background border-t border-border">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center"
           >
-            <div>
-              <motion.div variants={fadeUp} className="flex items-center gap-3 mb-5">
-                <div className="h-px w-6 bg-foreground/20" />
-                <span className="text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-muted-foreground">
-                  What we offer
-                </span>
-              </motion.div>
-              <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-serif mb-6 leading-tight">
-                Research, insight,<br />and strategic access
-              </motion.h2>
-              <motion.p variants={fadeUp} className="text-muted-foreground leading-relaxed text-lg">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-20">
+              <div>
+                <motion.div variants={fadeUp} className="flex items-center gap-3 mb-4">
+                  <div className="h-px w-6 bg-foreground/20" />
+                  <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-muted-foreground">
+                    What we offer
+                  </span>
+                </motion.div>
+                <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-serif leading-tight">
+                  Research, insight,<br />and strategic access
+                </motion.h2>
+              </div>
+              <motion.p variants={fadeUp} className="text-muted-foreground text-lg leading-relaxed self-end">
                 Anvesan helps fintechs, neobanks, and enterprises understand stablecoin infrastructure,
                 navigate regulation, and make better strategic decisions through focused research, market
                 intelligence, and access to experienced operators.
               </motion.p>
             </div>
 
-            <motion.div variants={stagger} className="space-y-4">
+            {/* Numbered rows */}
+            <motion.div variants={stagger} className="divide-y divide-border border-t border-border">
               {[
                 {
+                  n: "01",
                   title: "Research",
-                  desc: "Focused papers on infrastructure, regulation, and policy",
-                  icon: <FileText className="w-5 h-5" />,
+                  desc: "Focused papers on infrastructure, regulation, and policy — written for practitioners and decision-makers who need signal, not noise.",
                 },
                 {
+                  n: "02",
                   title: "Market Intelligence",
-                  desc: "Timely analysis of market structure and adoption trends",
-                  icon: <Lightbulb className="w-5 h-5" />,
+                  desc: "Timely analysis of market structure, competitive dynamics, and adoption trends across the global stablecoin landscape.",
                 },
                 {
+                  n: "03",
                   title: "Strategic Access",
-                  desc: "Network of experienced operators and industry veterans",
-                  icon: <BookOpen className="w-5 h-5" />,
+                  desc: "Direct access to a network of experienced operators and industry veterans across fintech, banking, and crypto infrastructure.",
                 },
-              ].map((item, i) => (
+              ].map((item) => (
                 <motion.div
                   variants={fadeUp}
-                  key={i}
-                  className="group flex gap-5 p-6 rounded-2xl border border-border bg-card hover:border-foreground/20 hover:shadow-md transition-all duration-200 card-hover"
+                  key={item.n}
+                  className="group grid grid-cols-[3rem_1fr] md:grid-cols-[5rem_1fr_1fr] gap-6 items-start py-8 hover:bg-foreground/[0.02] -mx-6 px-6 transition-colors cursor-default"
                 >
-                  <div className="mt-0.5 w-10 h-10 rounded-xl bg-foreground/5 border border-border flex items-center justify-center text-foreground/50 group-hover:bg-foreground/10 group-hover:text-foreground flex-shrink-0 transition-colors">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-serif text-xl font-medium mb-1.5 text-foreground">{item.title}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
-                  </div>
+                  <span className="font-serif text-sm text-muted-foreground/40 font-medium pt-0.5">{item.n}</span>
+                  <h4 className="font-serif text-2xl md:text-3xl text-foreground group-hover:text-muted-foreground transition-colors">{item.title}</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed hidden md:block">{item.desc}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -405,53 +549,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CONTACT ───────────────────────────────────────────────── */}
-      <section id="contact" className="py-28 md:py-36 bg-foreground text-background relative overflow-hidden">
-        {/* Noise */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            backgroundSize: "200px 200px",
-          }}
-        />
-
-        <div className="max-w-7xl mx-auto px-6 relative">
+      {/* ══════════════════════════════════════════════════════════
+          CONTACT — ULTRA MINIMAL
+      ══════════════════════════════════════════════════════════ */}
+      <section id="contact" className="relative py-36 md:py-48 bg-foreground text-background overflow-hidden noise">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="max-w-3xl mx-auto text-center"
           >
-            <motion.div variants={fadeUp} className="flex justify-center items-center gap-3 mb-8">
+            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-10">
               <div className="h-px w-6 bg-background/30" />
-              <span className="text-[0.65rem] font-semibold tracking-[0.22em] uppercase text-background/50">
+              <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-background/40">
                 Contact
               </span>
-              <div className="h-px w-6 bg-background/30" />
             </motion.div>
 
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6 text-background leading-tight">
-              Let's talk.
+            <motion.h2 variants={fadeUp} className="font-serif font-medium text-[clamp(2.5rem,5vw,5rem)] leading-[1.05] text-background mb-6 max-w-3xl">
+              For research partnerships, advisory, or media — reach us directly.
             </motion.h2>
 
-            <motion.p variants={fadeUp} className="text-base md:text-lg text-background/60 mb-12 leading-relaxed">
-              For research partnerships, strategic advisory, or media inquiries — reach us directly.
-            </motion.p>
+            <motion.div variants={fadeUp} className="h-px bg-background/10 max-w-2xl mb-10" />
 
             <motion.a
               variants={fadeUp}
               href="mailto:research@anvesan.org"
-              className="group inline-flex items-center gap-3 text-xl md:text-2xl font-serif text-background hover:text-background/70 transition-colors border-b border-background/25 pb-1.5 hover:border-background/50"
+              className="group inline-flex items-center gap-4 text-background"
             >
-              <Mail className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" />
-              research@anvesan.org
+              <div className="w-10 h-10 rounded-xl border border-background/20 flex items-center justify-center group-hover:bg-background/10 transition-colors">
+                <Mail className="w-5 h-5 text-background/60" />
+              </div>
+              <span className="font-serif text-xl md:text-2xl border-b border-background/20 pb-0.5 group-hover:border-background/50 transition-colors">
+                research@anvesan.org
+              </span>
             </motion.a>
           </motion.div>
         </div>
+
+        {/* Large decorative type in background */}
+        <div
+          aria-hidden
+          className="absolute right-0 bottom-0 font-serif font-bold text-[clamp(6rem,18vw,16rem)] leading-none text-background/[0.03] select-none pointer-events-none translate-y-1/4 translate-x-[10%]"
+        >
+          Anvesan
+        </div>
       </section>
+
     </Layout>
   );
 }
