@@ -1,0 +1,4 @@
+{
+  "buildCommand": "pnpm --filter @workspace/anvesan run build",
+  "outputDirectory": "artifacts/anvesan/dist/public"
+}
