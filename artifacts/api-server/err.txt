@@ -1,0 +1,12 @@
+C:\Users\ASUS\OneDrive\Desktop\Anvesan\artifacts\api-server\src\index.ts:7
+  throw new Error(
+        ^
+
+
+Error: PORT environment variable is required but was not provided.
+    at <anonymous> (C:\Users\ASUS\OneDrive\Desktop\Anvesan\artifacts\api-server\src\index.ts:7:9)
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+Node.js v22.13.1
