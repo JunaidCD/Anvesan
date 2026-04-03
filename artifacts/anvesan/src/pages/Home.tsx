@@ -217,55 +217,73 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════════
           MISSION
       ══════════════════════════════════════════════════════════ */}
-      <section id="mission" className="relative py-28 md:py-40 bg-foreground text-background overflow-hidden noise">
+      <section id="mission" className="relative py-32 md:py-44 bg-foreground text-background overflow-hidden">
+        {/* Noise texture */}
+        <div aria-hidden className="absolute inset-0 noise" />
+
+        {/* Large decorative quotation mark */}
+        <div
+          aria-hidden
+          className="absolute top-8 right-12 font-serif text-[18rem] leading-none text-background/[0.03] select-none pointer-events-none font-bold"
+          style={{ lineHeight: 1 }}
+        >
+          "
+        </div>
+
+        {/* Subtle top-left gradient blob */}
+        <div
+          aria-hidden
+          className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 70%)" }}
+        />
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 lg:gap-20"
           >
-            {/* Left — label column */}
-            <motion.div variants={fadeUp} className="pt-1">
-              <div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2">
-                <div className="h-px w-6 bg-background/30 lg:w-full lg:max-w-[2rem]" />
-                <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-background/40">
-                  Mission
-                </span>
-              </div>
+            {/* Top label row */}
+            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-16">
+              <div className="h-px w-8 bg-background/25" />
+              <span className="text-[0.6rem] font-bold tracking-[0.3em] uppercase text-background/35">
+                Mission
+              </span>
             </motion.div>
 
-            {/* Right — content column */}
-            <div className="space-y-8">
-              <motion.blockquote
-                variants={fadeUp}
-                className="text-2xl md:text-3xl lg:text-[2rem] font-serif leading-[1.38] text-background max-w-2xl"
-              >
+            {/* Main quote — left-bordered, prominent */}
+            <motion.div variants={fadeUp} className="pl-6 border-l-[2px] border-background/20 mb-16 max-w-3xl">
+              <blockquote className="text-[1.65rem] md:text-[2.1rem] lg:text-[2.4rem] font-serif leading-[1.32] text-background tracking-[-0.01em]">
                 Anvesan exists to accelerate stablecoin adoption to the point where stablecoins become
                 indistinguishable from money —{" "}
-                <em className="italic text-background/45">
+                <em className="italic" style={{ color: "hsl(var(--background) / 0.4)" }}>
                   ubiquitous, interoperable, and invisible in everyday use.
                 </em>
-              </motion.blockquote>
+              </blockquote>
+            </motion.div>
 
-              <motion.div variants={fadeUp} className="h-px bg-background/10" />
+            {/* Divider */}
+            <motion.div variants={fadeUp} className="h-px bg-background/8 mb-14 max-w-3xl" />
 
-              <motion.div
-                variants={stagger}
-                className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl"
-              >
-                <motion.p variants={fadeUp} className="text-sm font-light text-background/60 leading-relaxed">
+            {/* Two body columns with numbered labels */}
+            <motion.div variants={stagger} className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-3xl">
+              <motion.div variants={fadeUp}>
+                <p className="text-[0.6rem] font-bold tracking-[0.25em] uppercase text-background/25 mb-3">01</p>
+                <p className="text-sm font-light text-background/55 leading-[1.8]">
                   We believe the future of finance is one where remittance, trade settlement, and FX happen
                   instantly, seamlessly, and across borders with minimal friction.
-                </motion.p>
-                <motion.p variants={fadeUp} className="text-sm font-light text-background/60 leading-relaxed">
+                </p>
+              </motion.div>
+              <motion.div variants={fadeUp}>
+                <p className="text-[0.6rem] font-bold tracking-[0.25em] uppercase text-background/25 mb-3">02</p>
+                <p className="text-sm font-light text-background/55 leading-[1.8]">
                   Anvesan works closely with fintechs, neobanks, and enterprises building on stablecoin
                   rails — offering regulatory clarity, market intelligence, and access to a network of
                   industry veterans.
-                </motion.p>
+                </p>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -556,75 +574,96 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════════
           CONTACT — ULTRA MINIMAL
       ══════════════════════════════════════════════════════════ */}
-      <section id="contact" className="relative py-28 md:py-40 bg-foreground text-background overflow-hidden noise">
+      <section id="contact" className="relative py-32 md:py-44 bg-foreground text-background overflow-hidden">
+        {/* Noise */}
+        <div aria-hidden className="absolute inset-0 noise" />
+
+        {/* Bottom-right gradient glow */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 right-0 w-[600px] h-[400px] pointer-events-none"
+          style={{ background: "radial-gradient(ellipse at bottom right, rgba(255,255,255,0.03) 0%, transparent 70%)" }}
+        />
+
+        {/* Decorative "Anvesan" — constrained so it fits */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 right-0 font-serif font-bold leading-none text-background/[0.04] select-none pointer-events-none overflow-hidden"
+          style={{ fontSize: "clamp(5rem, 12vw, 11rem)", lineHeight: 1, paddingRight: "2rem", paddingBottom: "1rem" }}
+        >
+          Anvesan
+        </div>
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-12 lg:gap-20"
           >
-            {/* Left — label column */}
-            <motion.div variants={fadeUp} className="pt-1">
-              <div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2">
-                <div className="h-px w-6 bg-background/30 lg:w-full lg:max-w-[2rem]" />
-                <span className="text-[0.62rem] font-semibold tracking-[0.24em] uppercase text-background/40">
-                  Contact
-                </span>
-              </div>
+            {/* Label */}
+            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-14">
+              <div className="h-px w-8 bg-background/25" />
+              <span className="text-[0.6rem] font-bold tracking-[0.3em] uppercase text-background/35">
+                Contact
+              </span>
             </motion.div>
 
-            {/* Right — two-column content */}
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 md:gap-20 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16 lg:gap-24 items-start">
 
-              {/* Heading + email */}
-              <div className="space-y-8">
+              {/* Left — headline + email CTA */}
+              <div className="space-y-10">
                 <motion.h2
                   variants={fadeUp}
-                  className="font-serif font-medium text-3xl md:text-4xl lg:text-5xl leading-[1.15] text-background max-w-md"
+                  className="font-serif font-medium leading-[1.08] text-background"
+                  style={{ fontSize: "clamp(3.2rem, 6vw, 5.5rem)" }}
                 >
                   Let's talk.
                 </motion.h2>
 
                 <motion.div variants={fadeUp} className="h-px bg-background/10" />
 
+                {/* Email as a prominent button-link */}
                 <motion.a
                   variants={fadeUp}
                   href="mailto:research@anvesan.org"
-                  className="group inline-flex items-center gap-3 text-background"
+                  className="group flex items-center justify-between max-w-lg border border-background/15 rounded-2xl px-6 py-5 hover:bg-background/5 hover:border-background/30 transition-all duration-300"
                 >
-                  <div className="w-9 h-9 rounded-xl border border-background/20 flex items-center justify-center group-hover:bg-background/10 transition-colors flex-shrink-0">
-                    <Mail className="w-4 h-4 text-background/60" />
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-background/8 border border-background/15 flex items-center justify-center flex-shrink-0 group-hover:bg-background/15 transition-colors">
+                      <Mail className="w-4 h-4 text-background/60" />
+                    </div>
+                    <div>
+                      <p className="text-[0.6rem] font-bold tracking-[0.2em] uppercase text-background/30 mb-0.5">Email us</p>
+                      <p className="font-serif text-lg text-background">research@anvesan.org</p>
+                    </div>
                   </div>
-                  <span className="font-serif text-lg md:text-xl border-b border-background/20 pb-0.5 group-hover:border-background/50 transition-colors">
-                    research@anvesan.org
-                  </span>
+                  <ArrowUpRight className="w-5 h-5 text-background/30 group-hover:text-background/60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </motion.a>
               </div>
 
-              {/* Description block */}
-              <motion.div variants={fadeUp} className="max-w-xs space-y-4 md:pt-1">
-                <p className="text-sm font-light text-background/55 leading-relaxed">
-                  For research partnerships and strategic advisory engagements.
-                </p>
-                <p className="text-sm font-light text-background/55 leading-relaxed">
-                  For media inquiries and press coverage.
-                </p>
-                <p className="text-sm font-light text-background/55 leading-relaxed">
-                  For general correspondence.
-                </p>
+              {/* Right — use cases as styled list */}
+              <motion.div variants={stagger} className="space-y-0 border border-background/10 rounded-2xl overflow-hidden">
+                {[
+                  { n: "01", label: "Research partnerships", sub: "Strategic advisory engagements" },
+                  { n: "02", label: "Media & press", sub: "Inquiries and coverage requests" },
+                  { n: "03", label: "General", sub: "All other correspondence" },
+                ].map((item, i) => (
+                  <motion.div
+                    variants={fadeUp}
+                    key={item.n}
+                    className={`flex items-start gap-5 px-6 py-5 ${i < 2 ? "border-b border-background/8" : ""}`}
+                  >
+                    <span className="text-[0.55rem] font-bold tracking-[0.2em] text-background/20 mt-1 w-5 flex-shrink-0">{item.n}</span>
+                    <div>
+                      <p className="text-sm font-medium text-background/70 leading-none mb-1">{item.label}</p>
+                      <p className="text-xs text-background/35 leading-relaxed">{item.sub}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             </div>
           </motion.div>
-        </div>
-
-        {/* Decorative background type */}
-        <div
-          aria-hidden
-          className="absolute right-0 bottom-0 font-serif font-bold text-[clamp(6rem,18vw,16rem)] leading-none text-background/[0.025] select-none pointer-events-none translate-y-1/4 translate-x-[10%]"
-        >
-          Anvesan
         </div>
       </section>
 
